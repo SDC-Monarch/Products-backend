@@ -1,6 +1,6 @@
 const Papa = require('papaparse')
 const fs = require('fs')
-const file = fs.createReadStream('feature10.csv')
+const file = fs.createReadStream('photos10.csv')
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
@@ -21,30 +21,27 @@ function convertToObject(arr) {
   return result;
 }
 
-async function addFeature(features) {
+async function addPhotos(photos) {
   const client = new MongoClient(url, { useNewUrlParser: true });
   await client.connect();
 
   const db = client.db('test1');
-  const collection = db.collection('products');
+  const collection = db.collection('styles');
 
-  for (const id of Object.keys(features)) {
-    if (id % 100000 === 0)
-      console.log(id);
-    const query = { id: id };
-    const update = { $set: { features: features[id] } };
-    await collection.updateOne(query, update).then(result => console.log(result));
+  for (const photo of photos) {
+    await collection.updateOne({ id: photo[1] }, { $push: { 'photos': { 'thumbnail_url': photo[2], 'url': photo[3] } } })
   }
 
   await client.close();
 }
 
 Papa.parse(file, {
+  beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
   dynamicTyping: true,
   complete: async results => {
     console.log("All done!");
-    results.data = convertToObject(results.data)
-    await addFeature(results.data);
+    // results.data = convertToObject(results.data)
+    await addPhotos(results.data);
     console.log(results.data)
   }
 });
