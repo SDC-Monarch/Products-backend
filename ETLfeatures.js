@@ -41,6 +41,7 @@ async function addFeature(features) {
 
 Papa.parse(file, {
   dynamicTyping: true,
+  beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
   complete: async results => {
     console.log("All done!");
     results.data = convertToObject(results.data)

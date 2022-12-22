@@ -40,6 +40,7 @@ async function addRelated(related) {
 }
 
 Papa.parse(file, {
+  beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
   complete: async (results) => {
     console.log("All done!");
     results.data = groupBySecondColumn(results.data)

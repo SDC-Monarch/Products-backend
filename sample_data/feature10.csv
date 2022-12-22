@@ -1,0 +1,11 @@
+id,product_id,feature,value
+1,1,"Fabric","Canvas"
+2,1,"Buttons","Brass"
+3,2,"Lenses","Ultrasheen"
+4,2,"UV Protection",null
+5,2,"Frames","LightCompose"
+6,3,"Fabric","100% Cotton"
+7,3,"Cut","Skinny"
+8,4,"Fabric","99% Cotton 1% Elastic"
+9,4,"Cut","Loose"
+10,5,"Sole","Rubber"
