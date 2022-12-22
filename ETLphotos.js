@@ -42,7 +42,7 @@ Papa.parse(file, {
     console.log("All done!");
     // results.data = convertToObject(results.data)
     await addPhotos(results.data);
-    console.log(results.data)
+    // console.log(results.data)
   }
 });
 

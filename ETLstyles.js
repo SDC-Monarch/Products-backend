@@ -13,9 +13,10 @@ async function addStyles(styles) {
   for (const id of Object.keys(styles)) {
     if (id % 100000 === 0)
       console.log(id);
-    styles[id]['photos'] = []
+    styles[id]['photos'] = [];
+    styles[id]['skus'] = {};
   }
-  await collection.insertMany(styles).then(result => console.log(result));
+  await collection.insertMany(styles).then(result => console.log(result.insertedCount));
 
   await client.close();
 }
@@ -35,7 +36,7 @@ Papa.parse(file, {
   complete: async results => {
     console.log("All done!");
     await addStyles(results.data);
-    console.log(results.data)
+    // console.log(results.data)
   }
 });
 
