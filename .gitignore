@@ -1,4 +1,4 @@
 *.csv
-*.json
+package-lock.json
 node_modules
 !sample_data/*.csv

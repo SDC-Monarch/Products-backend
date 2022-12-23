@@ -7,14 +7,30 @@ const groupStyles = async () => {
 
   const db = client.db('test1');
   let queryId = 1;
-  // while (await db.collection('styles').count() > 0) {
-  while (queryId < 5) {
+  let documentsLeft = await db.collection('styles').count() > 0
+  while (documentsLeft) {
     const cursor = db.collection('styles').find({productId: queryId})
     const arr = await cursor.toArray()
-    console.log(arr)
+    const initalObj = {
+      "product_id": queryId,
+      "results": []
+    }
+    arr.forEach(style => {
+      initalObj.results.push({
+        "style_id": style.id,
+        "name": style.name,
+        "original_price": style.original_price,
+        "sale_price": style.sale_price,
+        "default?": style.default_style,
+        "photos": style.photos,
+        "skus": style.skus
+      })
+
+    })
+    await db.collection('styles2').insertOne(initalObj)
+    await db.collection('styles').deleteMany({productId: queryId})
     queryId += 1;
-    // console.log(typeof result);
-    // console.log(result);
+    documentsLeft = await db.collection('styles').count() > 0
   }
 
   // await collection.insertMany(styles).then(result => console.log(result.insertedCount));

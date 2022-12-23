@@ -1,6 +1,6 @@
 const Papa = require('papaparse')
 const fs = require('fs')
-const file = fs.createReadStream('product100.csv')
+const file = fs.createReadStream('product.csv')
 const mongodb = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/";
 

@@ -1,6 +1,6 @@
 const Papa = require('papaparse')
 const fs = require('fs')
-const file = fs.createReadStream('styles10.csv')
+const file = fs.createReadStream('sample_data/styles10.csv')
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
@@ -12,11 +12,11 @@ async function addStyles(styles) {
   const collection = db.collection('styles');
   for (const id of Object.keys(styles)) {
     if (id % 100000 === 0)
-      console.log(id);
+      console.log('Inserting style with id', id);
     styles[id]['photos'] = [];
     styles[id]['skus'] = {};
   }
-  await collection.insertMany(styles).then(result => console.log(result.insertedCount));
+  await collection.insertMany(styles).then(result => console.log('inserted count', result.insertedCount));
 
   await client.close();
 }

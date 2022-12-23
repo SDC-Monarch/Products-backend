@@ -1,6 +1,6 @@
 const Papa = require('papaparse')
 const fs = require('fs')
-const file = fs.createReadStream('related10.csv')
+const file = fs.createReadStream('sample_data/related10.csv')
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
@@ -43,13 +43,15 @@ Papa.parse(file, {
   beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
   complete: async (results) => {
     console.log("All done!");
+    console.log(results.data)
     results.data = groupBySecondColumn(results.data)
+    console.log(results.data)
     await addRelated(results.data);
   }
 });
 
-const output = {
-  1:[2,3,8,7],
-  2:[3,7,6,5],
-  3:[5,9]
-}
+const output = [
+  {'id': 1, 'related': [2,3,8,7]}
+  {'id': 2, 'related': [3,7,6,5]}
+  {'id': 3, 'related': [5,9]}
+]

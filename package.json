@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mongodb": "^4.13.0",
+    "mongoose": "^6.8.1",
+    "papaparse": "^5.3.2"
+  }
+}
