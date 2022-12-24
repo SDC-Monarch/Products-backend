@@ -1,6 +1,7 @@
 const Papa = require('papaparse')
 const fs = require('fs')
-const file = fs.createReadStream('sample_data/photos10.csv')
+Papa.LocalChunkSize =  Papa.LocalChunkSize;
+const file = fs.createReadStream('photos.csv', { highWaterMark: Papa.LocalChunkSize })
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 
@@ -35,15 +36,22 @@ async function addPhotos(photos) {
   await client.close();
 }
 
+var timeToComplete = new Date();
+
 Papa.parse(file, {
   beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
   dynamicTyping: true,
-  complete: async results => {
+  chunk: (results) => {
+    // resultArray.push(results.data)
+    console.log(results.data[0][0])
+  },
+  complete: results => {
     console.log("All done!");
+    console.log('Done in ', (new Date() - timeToComplete)/1000)
     // results.data = convertToObject(results.data)
-    await addPhotos(results.data);
+    // await addPhotos(results.data);
     // console.log(results.data)
-  }
+  },
 });
 
 const output = {

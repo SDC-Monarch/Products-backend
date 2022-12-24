@@ -1,29 +1,36 @@
-const getRelated = (input) => {
-  // Create a map to store the related items for each id
-  const map = new Map();
-  for (const [id, groupId, relatedId] of input) {
-    // If the groupId is not in the map, add it with an empty array
-    if (!map.has(groupId)) {
-      map.set(groupId, []);
-    }
-    // Add the related id to the array for the groupId
-    map.get(groupId).push(relatedId);
-  }
-  // Convert the map to an array of objects
-  const output = Array.from(map, ([groupId, related]) => ({ id: groupId, related }));
-  return output;
-}
+const Papa = require('papaparse')
+const fs = require('fs')
 
-var output = getRelated([
-  [ '1', '1', '2' ],
-  [ '2', '1', '3' ],
-  [ '3', '1', '8' ],
-  [ '4', '1', '7' ],
-  [ '5', '2', '3' ],
-  [ '6', '2', '7' ],
-  [ '7', '2', '6' ],
-  [ '8', '2', '5' ],
-  [ '9', '3', '5' ],
-  [ '10', '3', '9' ]
-])
-console.log(output, new Date)
+// const big = {};
+
+// const file1 = fs.createReadStream('skus.csv', { highWaterMark: Papa.LocalChunkSize })
+// Papa.parse(file1, {
+//   beforeFirstChunk: chunk => chunk.split('\n').slice(1).join('\n'),
+//   dynamicTyping: true,
+//   header: true,
+//   complete: results => {
+//     console.log("All done skus!");
+//     big['skus'] = results.data;
+//   },
+//   chunk: results => console.log(results.data)
+// });
+
+// console.log('here')
+
+const file2 = fs.createReadStream('sample_data/styles10.csv', { highWaterMark: Papa.LocalChunkSize })
+Papa.parse(file2, {
+  dynamicTyping: true,
+  transform: (value, header) => {
+    if (value === 'null')
+      return null
+    if (header === 'default_style' && value === '0')
+      return false
+    if (header === 'default_style' && value === '1')
+      return true
+    return value
+  },
+  complete: results => {
+    console.log(results.data[0])
+    console.log(results.data[1])
+  }
+});
