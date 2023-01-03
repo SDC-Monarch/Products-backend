@@ -67,7 +67,6 @@ const readstyles = () => {
         results.data = Array.from(results.data)
         big = big.concat(results.data)
         console.log(`Heap allocated ${Math.round(process.memoryUsage()['heapUsed']/1024/1024/1024*100)/100} GB`);
-        delete results //debug
       }
     });
   })
