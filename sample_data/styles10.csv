@@ -1,0 +1,11 @@
+id,productId,name,sale_price,original_price,default_style
+1,1,"Forest Green & Black",null,140,1
+2,1,"Desert Brown & Tan",null,140,0
+3,1,"Ocean Blue & Grey",100,140,0
+4,1,"Digital Red & Black",null,140,0
+5,1,"Sky Blue & White",100,140,0
+6,1,"Dark Grey & Black",null,170,0
+7,2,"Black Lenses & Black Frame",null,69,0
+8,2,"Black Lenses & Gold Frame",null,69,1
+9,2,"Gold Lenses & Black Frame",null,69,0
+10,2,"Gold Lenses & Gold Frame",null,69,0
