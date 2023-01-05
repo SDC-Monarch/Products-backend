@@ -1,7 +1,32 @@
 {
   "dependencies": {
+    "express": "^4.18.2",
     "mongodb": "^4.13.0",
-    "mongoose": "^6.8.1",
+    "mongoose": "^6.8.2",
     "papaparse": "^5.3.2"
-  }
+  },
+  "name": "monach-sdc-products",
+  "description": "This is the backend for the Products section of the Swan e-commerce website. The goal is to create an ETL then a server that can be deployed easily to multiple EC2 instances and load balanced hanlding 10s of thousands of requests.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "etl": "node "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SDC-Monarch/Products-backend.git"
+  },
+  "keywords": [
+    "nginx",
+    "ETL",
+    "express",
+    "mongoDB"
+  ],
+  "author": "Nathan Pirhalla <pirhalla93@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SDC-Monarch/Products-backend/issues"
+  },
+  "homepage": "https://github.com/SDC-Monarch/Products-backend#readme"
 }
