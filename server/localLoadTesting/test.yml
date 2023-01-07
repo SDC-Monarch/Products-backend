@@ -1,0 +1,30 @@
+# config:
+#   target: "localhost:3000/products/5"
+#   phases:
+#     # - duration: 120
+#     #   arrivalRate: 1
+#     #   rampTo: 1000
+#     #   name: Full ramp
+#     - duration: 20
+#       arrivalRate: 1
+#       name: First Test
+
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 1
+      arrivalRate: 10
+      name: test1
+    - duration: 1
+      arrivalRate: 100
+      name: test2
+    - duration: 2
+      arrivalRate: 1000
+      name: test3
+  http:
+    timeout: 30
+scenarios:
+  - name: senarios1
+    flow:
+      - get:
+          url: "/products/5/related"
